@@ -12,4 +12,4 @@ Open a terminal on your RPi:<br/>
 git clone https://github.com/thinkedinthesea/PowermyPi-UNO.git<br/>
 cd PowermyPi-UNO<br/>
 chmod u+x install.sh<br/>
-sudo ./install 1<br/>
+sudo ./install.sh 1<br/>
