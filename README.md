@@ -7,4 +7,8 @@ The board uses an attiny85 for powering and interact with the RPi. This chpi is 
 A little Python script run on the RPi for watchdog signal and for reboot/shutdown command.<br/>
 One button, short press shutdown/long press reboot. SIMPLE<br/>
 <br/><br/>
-Installation:<br/>
+Installation:<br/><br/>
+Open a terminal on your RPi:<br/>
+git clone https://github.com/thinkedinthesea/PowermyPi-UNO.git<br/>
+cd PowermyPi-UNO<br/>
+./install 1<br/>
