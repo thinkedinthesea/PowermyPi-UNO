@@ -33,40 +33,32 @@ case "$1" in
 	1)
 		#check if the cronjob exist #################################
 		crontab -l | grep -q 'powermypi' && A=1 || A=2
-		#create the directory /home/pi/powermypi ####################
-		mkdir -p /home/pi/powermypi
-		#download the script powermypi_uno.py #######################
-		wget --no-check-certificate 'https://docs.google.com/uc?export=download&id=1u5o6yIXRZOYcQRaOA-BL1aLzy2X_miaX' -O /home/pi/powermypi/powermypi_uno.py
 		#executable #################################################
-		chmod u+x /home/pi/powermypi/powermypi_uno.py
+		chmod powermypi_uno.py
 		#create the crontab #########################################
-		crontab -l | { cat; echo "@reboot sudo /usr/bin/python /home/pi/powermypi/powermypi_uno.py &"; } | crontab -
+		crontab -l | { cat; echo "@reboot sudo /usr/bin/python /home/pi/PowermyPi-UNO/powermypi_uno.py &"; } | crontab -
 		echo "Well Done. Reboot and add PowermyPi board."
 		exit 1
 		;;
 	2)
 		#check if the cronjob exist ################################
 		#remove the cronjob#########################################
-		crontab -l | grep -v "@reboot sudo /usr/bin/python /home/pi/powermypi/powermypi_uno.py &" | crontab -
+		crontab -l | grep -v "@reboot sudo /usr/bin/python /home/pi/PowermyPi/powermypi_uno.py &" | crontab -
 		echo "Well Done. Reboot and remove PowermyPi board."
 		exit 1
 		;;
 	3)
-		#create the directory /home/pi/powermypi ###################
-		mkdir -p /home/pi/powermypi
-		#download the script powermypi_network.py #################
-		wget --no-check-certificate 'https://docs.google.com/uc?export=download&id=1G8UNuCMlJjzRX2eCcN0vTVACegqI3rPx' -O /home/pi/powermypi/powermypi_network.py
 		#executable ###############################################
-		chmod u+x /home/pi/powermypi/powermypi_network.py
+		chmod u+x powermypi_network.py
 		#create the cron ##########################################
-		crontab -l | { cat; echo "@reboot sudo /usr/bin/python /home/pi/powermypi/powermypi_network.py &"; } | crontab -
+		crontab -l | { cat; echo "@reboot sudo /usr/bin/python /home/pi/PowermyPi-UNO/powermypi_network.py &"; } | crontab -
 		echo "Well Done. Reboot to use the Network Module."
 		exit 1
 		;;
 	4)
 		#check if the cronjob exist ################################ 
                 #remove the cronjob#########################################
-                crontab -l | grep -v "@reboot sudo /usr/bin/python /home/pi/powermypi/powermypi_network.py &" | crontab -
+                crontab -l | grep -v "@reboot sudo /usr/bin/python /home/pi/PowermyPi-UNO/powermypi_network.py &" | crontab -
                 echo "Well Done. Reboot to remove the Network Module."
                 exit 1
 		;;
