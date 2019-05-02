@@ -34,7 +34,7 @@ case "$1" in
 		#check if the cronjob exist #################################
 		crontab -l | grep -q 'powermypi' && A=1 || A=2
 		#executable #################################################
-		chmod powermypi_uno.py
+		chmod u+x powermypi_uno.py
 		#create the crontab #########################################
 		crontab -l | { cat; echo "@reboot sudo /usr/bin/python /home/pi/PowermyPi-UNO/powermypi_uno.py &"; } | crontab -
 		echo "Well Done. Reboot and add PowermyPi board."
