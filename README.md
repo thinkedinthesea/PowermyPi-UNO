@@ -10,6 +10,7 @@ One button, short press shutdown/long press reboot. SIMPLE<br/>
 Installation:<br/><br/>
 Open a terminal on your RPi:<br/>
 pip install RPi.GPIO<br/>
+cd /home/pi<br/>
 git clone https://github.com/thinkedinthesea/PowermyPi-UNO.git<br/>
 cd PowermyPi-UNO<br/>
 chmod u+x install.sh<br/>
