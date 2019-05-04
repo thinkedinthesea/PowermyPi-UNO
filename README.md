@@ -16,7 +16,7 @@ Attiny pin specifications:<br/>
       (D 4) PB4  3|    |6  PB1 (D 1) 
             GND  4|    |5  PB0 (D 0)
                   +----+
-PB0: Output to power the RPI
+PB0: Output to power the RPI<br/>
 PB1: LED Output<br/>
 PB2: Watchdog signal received from RPI<br/>
 PB3: Button input<br/>
