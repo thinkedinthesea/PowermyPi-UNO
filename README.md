@@ -20,4 +20,5 @@ cd /home/pi/PowermyPi-UNO<br/>
 sudo ./install.sh 2<br/><br/><br/>
 **ATTINY85 Programming**:<br/><br/>
 Follow instructions on https://github.com/SpenceKonde/ATTinyCore/blob/master/Installation.md<br/>
-This show how to set up your Arduino IDE
+This show how to set up your Arduino IDE.<br/>
+the file powermypi_uno.ino is the source code for the attiny85.
