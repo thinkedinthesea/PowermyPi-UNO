@@ -11,11 +11,11 @@ Attiny pin specifications:<br/>
  ATMEL ATTINY85 / ARDUINO<br/>
 
                   +-\/-+
-      (D 5) PB5  1|    |8  Vcc
-      (D 3) PB3  2|    |7  PB2 (D 2)
-      (D 4) PB4  3|    |6  PB1 (D 1) 
-            GND  4|    |5  PB0 (D 0)
-                  +----+
+       PB5  1|    |8  Vcc
+       PB3  2|    |7  PB2 
+       PB4  3|    |6  PB1  
+       GND  4|    |5  PB0 
+             +----+
 PB0: Output to power the RPI<br/>
 PB1: LED Output<br/>
 PB2: Watchdog signal received from RPI<br/>
