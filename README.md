@@ -10,7 +10,7 @@ One button, short press shutdown/long press reboot. SIMPLE<br/>
 Attiny pin specifications:<br/>
  ATMEL ATTINY85 / ARDUINO<br/>
 
-                  +-\/-+
+             +-\/-+
        PB5  1|    |8  Vcc
        PB3  2|    |7  PB2 
        PB4  3|    |6  PB1  
