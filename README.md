@@ -7,21 +7,6 @@ The board uses an attiny85 for powering and interact with the RPi. This chip is 
 A little Python script run on the RPi for watchdog signal and for reboot/shutdown command.<br/>
 One button, short press shutdown/long press reboot. SIMPLE<br/>
 <br/><br/>
-Attiny pin specifications:<br/>
- ATMEL ATTINY85 / ARDUINO<br/>
-
-             +-\/-+
-       PB5  1|    |8  Vcc
-       PB3  2|    |7  PB2 
-       PB4  3|    |6  PB1  
-       GND  4|    |5  PB0 
-             +----+
-PB0: Output to power the RPI<br/>
-PB1: LED Output<br/>
-PB2: Watchdog signal received from RPI<br/>
-PB3: Button input<br/>
-PB4: Reboot/Shutdown signal output to RPI<br/>
-<br/><br/>
 **Installation:**<br/><br/>
 Open a terminal on your RPi:<br/>
 pip install RPi.GPIO<br/>
