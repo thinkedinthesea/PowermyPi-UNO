@@ -10,7 +10,7 @@ import time
 from socket import *
 import os
 time.sleep(10)
-myPort=12345
+myPort=1234
 s=socket(AF_INET, SOCK_DGRAM)
 s.connect(("8.8.8.8",80))
 ip_address = s.getsockname()[0]
