@@ -54,7 +54,7 @@ echo
 echo "Add cronjob..."
 echo
 crontab -l | grep -v "@reboot sudo /usr/bin/python /usr/local/bin/powermypi_uno.py &" | crontab -
-crontab -l | { cat; echo "@reboot sudo /usr/bin/python /usr/local/bin/powermypi_uno.py"; } | crontab -
+crontab -l | { cat; echo "@reboot sudo /usr/bin/python /usr/local/bin/powermypi_uno.py &"; } | crontab -
 ##
 echo
 echo -n "SHUTDOWN NOW? [y/N]"
