@@ -4,6 +4,7 @@
 #PiFUN
 #
 #rev03122019
+#rev10092020
 #
 if [ $(id -u) -ne 0 ]; then
 	echo "Installer must be run as root."
