@@ -1,55 +1,67 @@
-#!/bin/bash
+#! /bin/bash
 #
-# PowermyPi Install Script
+#THINKEDINTHESEA
+#PiFUN
 #
-# thinkedinthesea.com
-# -------------------
+#rev03122019
 #
-# rev1 - 260419
-# initial release
-#
-# FEATURE:
-# - Install/Remove PowermyPi script
-#
-# COMMAND LINE:
-# 1 Install PowermyPi script
-# 2 Remove PowermyPi script
-#
-#REV="rev1-260419"
-REV="rev2-100920"
-printf "\033c"
-#check sudo
-if [ "$(whoami)" != "root" ] 
-	then
-	echo "Please run as root."
+if [ $(id -u) -ne 0 ]; then
+	echo "Installer must be run as root."
+	echo "Try 'sudo bash $0'"
 	exit 1
-#continue
 fi
-#root
-#check command line
-case "$1" in
-	1)
-		#check if the cronjob exist #################################
-		crontab -l | grep -q 'powermypi' && A=1 || A=2
-		#executable #################################################
-		chmod u+x powermypi_uno.py
-		#create the crontab #########################################
-		crontab -l | { cat; echo "@reboot sudo /usr/bin/python /home/pi/PowermyPi-UNO/powermypi_uno.py &"; } | crontab -
-		echo "Well Done. Reboot and add PowermyPi board."
-		exit 1
-		;;
-	2)
-		#check if the cronjob exist ################################
-		#remove the cronjob#########################################
-		crontab -l | grep -v "@reboot sudo /usr/bin/python /home/pi/PowermyPi-UNO/powermypi_uno.py &" | crontab -
-		echo "Well Done. Reboot and remove PowermyPi board."
-		exit 1
-		;;
-	*)
-		echo "Invalid Argument."
-		echo "Run this command with one of the following options:"
-		echo "1 Install PowermyPi script"
-		echo "2 Remove PowermyPi script"
-		exit 1
-		;;
-esac
+clear
+#
+echo "------------------------------------------------------------------"
+echo "This script downloads and install"
+echo "POWERMYPI-UNO python script"
+echo
+echo "- Update package index files (apt-get update)."
+echo "- Install Python libraries."
+echo "- Install powermypi_uno.py script in /usr/local/bin."
+echo
+echo "WARNING:"
+echo "After install complete, shutdown and connect POWERMYPI-UNO board."
+echo "------------------------------------------------------------------"
+echo
+echo -n "CONTINUE? [y/N] "
+read
+if [[ ! "$REPLY" =~ ^(yes|y|Y)$ ]]; then
+	echo "Cancelled."
+	exit 0
+fi
+#
+echo -n "Downloading, installing powermypi_uno..."
+# Download to tmpfile because might already be running
+curl -f -s -o /tmp/powermypi_uno.py https://raw.githubusercontent.com/thinkedinthesea/PowermyPi-UNO/master/powermypi_uno.py
+if [ $? -eq 0 ]; then
+	mv /tmp/powermypi_uno.py /usr/local/bin
+	chmod 755 /usr/local/bin/powermypi_uno.py
+	echo "OK"
+else
+	echo "ERROR"
+fi
+#
+echo -n "Performing other system configuration..."
+echo
+echo
+apt-get update
+sudo apt install python3-pip
+sudo pip3 install rpi.gpio
+echo
+echo
+echo "Add cronjob..."
+echo
+crontab -l | grep -v "@reboot sudo /usr/bin/python /usr/local/bin/powermypi_uno.py &" | crontab -
+crontab -l | { cat; echo "@reboot sudo /usr/bin/python /usr/local/bin/powermypi_uno.py"; } | crontab -
+##
+echo
+echo -n "SHUTDOWN NOW? [y/N]"
+read
+if [[ "$REPLY" =~ ^(yes|y|Y)$ ]]; then
+	echo "Shutdown started..."
+	shutdown
+#else
+	echo
+	echo "Done"
+fi
