@@ -24,7 +24,7 @@ poweroff = 0
 # start program, make WD HIGH
 GPIO.output(11, True)
 while True:
-    if (GPIO.input(12) == False):
+    if (GPIO.input(12) == True):
         tempo = time.time()
         while (time.time() < tempo + 2):
             if (GPIO.input(12) == True):
