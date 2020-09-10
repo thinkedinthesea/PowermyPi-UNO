@@ -10,7 +10,8 @@ One button, short press shutdown/long press reboot. SIMPLE<br/>
 **HOW TO INSTALL:**<br/><br/>
 Open a terminal on your RPi:<br/>
 cd /home/pi<br/>
-git clone https://github.com/thinkedinthesea/PowermyPi-UNO.git<br/>
+curl https://raw.githubusercontent.com/thinkedinthesea/PowermyPi-UNO/master/install.sh > install.sh<br/>
+sudo bash install.sh<br/>
 <br/><br/>
 **ATTINY85 Programming**:<br/><br/>
 Follow instructions on https://github.com/SpenceKonde/ATTinyCore/blob/master/Installation.md<br/>
