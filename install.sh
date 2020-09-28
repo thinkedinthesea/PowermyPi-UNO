@@ -42,30 +42,20 @@ if [ $? -eq 0 ]; then
 else
 	echo "ERROR"
 fi
-# Download to tmpfile because might already be running
-curl -f -s -o /tmp/powermypi_uno.py https://raw.githubusercontent.com/thinkedinthesea/PowermyPi-UNO/master/led.py
-if [ $? -eq 0 ]; then
-	mv /tmp/led.py /usr/local/bin
-	chmod 755 /usr/local/bin/led.py
-	echo "OK"
-else
-	echo "ERROR"
-fi
 #
 echo -n "Performing other system configuration..."
 echo
 echo
 apt-get update
 sudo apt install python3-pip
-sudo pip3 install rpi.gpio rpi_ws281x adafruit-circuitpython-neopixel
+sudo pip3 install rpi.gpio
 echo
 echo
 echo "Add cronjob..."
 echo
+##
 crontab -l | grep -v "@reboot sudo /usr/bin/python3 /usr/local/bin/powermypi_uno.py &" | crontab -
 crontab -l | { cat; echo "@reboot sudo /usr/bin/python3 /usr/local/bin/powermypi_uno.py &"; } | crontab -
-crontab -l | grep -v "@reboot sudo /usr/bin/python3 /usr/local/bin/led.py &" | crontab -
-crontab -l | { cat; echo "@reboot sudo /usr/bin/python3 /usr/local/bin/led.py &"; } | crontab -
 ##
 echo
 echo -n "SHUTDOWN NOW? [y/N]"
