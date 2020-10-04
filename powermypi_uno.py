@@ -5,7 +5,7 @@
 #       *************
 #        _____________________
 #       |                     |
-#  	|   THINKEDINTHESEA   |
+#    	|   THINKEDINTHESEA   |
 #       |_____________________|
 #
 #
@@ -15,7 +15,7 @@ import os
 #
 GPIO.setmode(GPIO.BOARD)
 # SR imput
-GPIO.setup(12, GPIO.IN)
+GPIO.setup(12, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 # WD output
 GPIO.setup(11, GPIO.OUT)
 #
