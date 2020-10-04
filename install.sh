@@ -46,7 +46,7 @@ fi
 echo -n "Performing other system configuration..."
 echo
 echo
-apt-update
+apt update
 apt install python3-pip
 pip3 install rpi.gpio
 echo
