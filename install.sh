@@ -46,9 +46,9 @@ fi
 echo -n "Performing other system configuration..."
 echo
 echo
-apt-get update
-sudo apt install python3-pip
-sudo pip3 install rpi.gpio
+apt-update
+apt install python3-pip
+pip3 install rpi.gpio
 echo
 echo
 echo "Add cronjob..."
