@@ -1,11 +1,8 @@
-/*
- * POWERMYPI UNO
- * thinkedinthesea.com
- * 
- * rev02
- * 191020
- * production release
-*/
+//POWERMYPI-UNO
+//THINKEDINTHESEA
+//
+//rev19102020
+//
 const int POWER_OUT = 0;
 const int POWER_LED = 1;
 const int WATCHDOG = 2;
@@ -51,10 +48,10 @@ void loop() {
   if (restart == 0) {
     tempo = 0;
     while (digitalRead(POWER_BTN) == LOW) {
-      delay(100);
       tempo++;
+      delay(500);
     }
-    if (tempo > 100) {
+    if (tempo > 5 || tempo == 5) {
       //poweroff
       digitalWrite(SR, HIGH);
       while (digitalRead(WATCHDOG) == HIGH) {
@@ -69,7 +66,9 @@ void loop() {
       digitalWrite(POWER_LED, LOW);
       digitalWrite(SR, LOW);
       reboot = 1;
-    } else if (tempo < 101) {
+    } else if (tempo < 5) {
+      digitalWrite(SR, HIGH);
+      delay(200);
       digitalWrite(SR, LOW);
       while (digitalRead(WATCHDOG) == HIGH) {
         digitalWrite(POWER_LED, HIGH);
