@@ -1,3 +1,11 @@
+/*
+ * POWERMYPI UNO
+ * thinkedinthesea.com
+ * 
+ * rev02
+ * 191020
+ * production release
+*/
 const int POWER_OUT = 0;
 const int POWER_LED = 1;
 const int WATCHDOG = 2;
