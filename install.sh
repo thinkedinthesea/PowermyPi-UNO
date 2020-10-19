@@ -34,7 +34,8 @@ fi
 #
 echo -n "Downloading, installing powermypi_uno..."
 # Download to tmpfile because might already be running
-curl -f -s -o /tmp/powermypi_uno.py https://raw.githubusercontent.com/thinkedinthesea/PowermyPi-UNO/master/powermypi_uno.py
+#curl -f -s -o /tmp/powermypi_uno.py https://raw.githubusercontent.com/thinkedinthesea/PowermyPi-UNO/master/powermypi_uno.py
+curl -f -s -o /tmp/powermypi_uno.py https://raw.githubusercontent.com/thinkedinthesea/PowermyPi-UNO/master/powermypi_uno_rev2.py
 if [ $? -eq 0 ]; then
 	mv /tmp/powermypi_uno.py /usr/local/bin
 	chmod 755 /usr/local/bin/powermypi_uno.py
