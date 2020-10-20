@@ -21,10 +21,10 @@ GPIO.output(11, True)
 while True:
   if (GPIO.input(12) == True):
     time.sleep(2)
-  if (GPIO.input(12) == True):
-    os.system("sudo poweroff")
-    break
-  else:
-    os.system("sudo reboot")
-    break
+    if (GPIO.input(12) == True):
+      os.system("sudo poweroff")
+      break
+    else:
+      os.system("sudo reboot")
+      break
   time.sleep(0.1)
