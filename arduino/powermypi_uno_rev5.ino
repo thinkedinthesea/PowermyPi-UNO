@@ -3,7 +3,6 @@
 //
 //rev19102020
 //rev27102020
-//rev28102020
 //
 #include <avr/sleep.h>
 #include <avr/power.h>
@@ -50,7 +49,7 @@ void setup() {
 void loop() {
   timeCounter = 0;
   if (wdReceived == 0) {
-    startUp(200, 1000);
+    startUp(500, 1000);
   }
   else {
     wdReceived = 0;
@@ -69,7 +68,7 @@ void loop() {
   if (wdReceived != 1) {
     digitalWrite(LED, HIGH);
     button.update();
-    while (button.state() == HIGH) {
+    while (button.state() == HIGH && wdReceived != 1) {
       button.update();
       //
       ///////////////////////////////////////
@@ -78,28 +77,46 @@ void loop() {
       //se riprende torna nel ciclo
       ///////////////////////////////////////
       //
-    }
-    delay(3000);
-    button.update();
-    if (button.state() == LOW) {
-      digitalWrite(SR, HIGH);
-      digitalWrite(LED, LOW);
-      while (digitalRead(WD) == HIGH) {
+      timeCounter = 0;
+      if (digitalRead(WD) == LOW) {
+        while (digitalRead(WD) == LOW) {
+          delay(200);
+          digitalWrite(LED, LOW);
+          delay(500);
+          digitalWrite(LED, HIGH);
+          timeCounter++;
+          if (timeCounter > watchdogTime) {
+            digitalWrite(OUT, LOW);
+            digitalWrite(LED, LOW);
+            wdReceived = 1;
+            break;
+          }
+        }
       }
-      delay(10000);
-      digitalWrite(OUT, LOW);
-      wdReceived = 1;
     }
-    else {
-      digitalWrite(SR, HIGH);
-      digitalWrite(LED, LOW);
-      delay(200);
-      digitalWrite(SR, LOW);
-      digitalWrite(LED, HIGH);
-      while (digitalRead(WD) == HIGH) {
+    if (wdReceived != 1) {
+      delay(3000);
+      button.update();
+      if (button.state() == LOW) {
+        digitalWrite(SR, HIGH);
+        digitalWrite(LED, LOW);
+        while (digitalRead(WD) == HIGH) {
+        }
+        delay(10000);
+        digitalWrite(OUT, LOW);
+        wdReceived = 1;
       }
-      reBoot = 1;
-      wdReceived = 1;
+      else {
+        digitalWrite(SR, HIGH);
+        digitalWrite(LED, LOW);
+        delay(200);
+        digitalWrite(SR, LOW);
+        digitalWrite(LED, HIGH);
+        while (digitalRead(WD) == HIGH) {
+        }
+        reBoot = 1;
+        wdReceived = 1;
+      }
     }
   }
 }
@@ -119,7 +136,7 @@ void checkWatchdog() {
     digitalWrite(LED, LOW);
     timeCounter++;
     if (timeCounter > watchdogTime) {
-      digitalWrite(OUT, HIGH);
+      digitalWrite(OUT, LOW);
       digitalWrite(LED, LOW);
       wdReceived = 1;
       break;
@@ -142,7 +159,7 @@ void goToSleep () {
   sleep_disable();// <avr/sleep.h>
   power_all_enable();    // power everything back on <avr/power.h>
   //
-   ADCSRA = 0;            // turn off ADC
+  ADCSRA = 0;            // turn off ADC
 }
 void wakeUpNow() {
   // execute code here after wake-up before returning to the loop() function
